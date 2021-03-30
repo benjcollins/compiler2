@@ -1,0 +1,5 @@
+fn add(a, b : int) -> int {
+    z : int
+    x, y := 9, 2
+    return x
+}
