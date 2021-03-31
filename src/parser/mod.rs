@@ -181,18 +181,20 @@ impl<'a> Parser<'a> {
         let decl = self.parse_decl();
         let params = self.parse_decls(decl);
         self.consume_symbol(")")?;
-        let ret = if self.try_consume_symbol("->") {
-            Some(self.parse_type())
-        } else {
-            None
-        };
+        let rets = vec![];
+        if self.try_consume_symbol("->") {
+            rets.push(self.parse_type());
+            while self.try_consume_symbol(",") {
+                rets.push(self.parse_type())
+            }
+        }
         self.consume_symbol("{")?;
 
         let mut statements = vec![];
         while !self.try_consume_symbol("}") {
             statements.push(self.parse_statement());
         }
-        Ok(Function { name, params, ret, statements })
+        Ok(Function { name, params, rets, statements })
     }
 }
 

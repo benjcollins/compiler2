@@ -33,6 +33,6 @@ pub enum Expr<'a> {
 pub struct Function<'a> {
     pub name: &'a str,
     pub params: Vec<Declaration<'a>>,
-    pub ret: Option<Type<'a>>,
+    pub rets: Vec<Type<'a>>,
     pub statements: Vec<Statement<'a>>,
 }
